@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-type notation for the following function
+type notation for the function
 """
 from typing import TypeVar, Mapping, Union
 
