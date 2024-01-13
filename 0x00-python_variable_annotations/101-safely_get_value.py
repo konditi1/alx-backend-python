@@ -1,17 +1,23 @@
 #!/usr/bin/env python3
 """
-type notation for the function
+Defines safely_get_value function
 """
-from typing import TypeVar, Mapping, Any, Union
-
-K = TypeVar('K')
-V = TypeVar('V')
+from typing import Mapping, Any, Union, TypeVar
 
 
-def safely_get_value(dct: Mapping[K, V], key: K, default: Union[V, None] = None) -> Union[V, None]:
+def safely_get_value(dct: Mapping,
+                     key: Any,
+                     default:
+                     Union[TypeVar('T'),
+                           None] = None) -> Union[Any, TypeVar('T')]:
     """
-    Return the value associated with the key in the mapping,
-    or the default value if the key is not present.
+    Gets a value from a dict
+
+    Args:
+        dct: the dict
+
+    Return:
+        value from a dict related to key or None
     """
     if key in dct:
         return dct[key]
