@@ -22,4 +22,5 @@ array = (12, 72, 91)  # Use a tuple instead of a list for 'array'
 
 zoom_2x = zoom_array(array)
 
-zoom_3x = zoom_array(array, 3)  # Pass an integer instead of a float for 'factor'
+# Pass an integer instead of a float for 'factor'
+zoom_3x = zoom_array(array, 3)
