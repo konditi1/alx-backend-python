@@ -3,11 +3,10 @@
 Annotate the below function’s parameters and return values with the
 appropriate types
 """
+from typing import List, Tuple, Iterable, Sequence
 
-from typing import List
 
-
-def element_length(lst: list) -> List[tuple]:
+def element_length(lst: Iterable[Sequence]) -> List[Tuple[Sequence, int]]:
     """
     Annotate the below function’s parameters and return values with the
     appropriate types
