@@ -2,15 +2,15 @@
 """
 type notation for the following function
 """
-from typing import TypeVar, Dict, Optional, Union
+from typing import TypeVar, Mapping, Optional, Union
 
 K = TypeVar('K')
 V = TypeVar('V')
 
 
-def safely_get_value(dct: Dict[K, V], key: K, default: Optional[V] = None) -> Union[V, None]:
+def safely_get_value(dct: Mapping[K, V], key: K, default: Optional[V] = None) -> Union[V, None]:
     """
-    Return the value associated with the key in the dictionary,
+    Return the value associated with the key in the mapping,
     or the default value if the key is not present.
     """
     if key in dct:
