@@ -1,9 +1,7 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 """
 Augment the following code with the correct duck-typed annotations:
 """
-
-
 from typing import Any, Sequence, Union
 
 
