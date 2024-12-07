@@ -18,7 +18,10 @@ def stream_users_in_batches(batch_size):
             if connection and connection.is_connected():
                 with connection.cursor(dictionary=True, buffered=False) as cursor:
                     cursor.execute("SELECT user_id, name, email, age FROM user_data;")
-                    while batch := cursor.fetchmany(batch_size):            
+                    while True: 
+                        batch = cursor.fetchmany(batch_size)
+                        if not batch:
+                            break          
                         for row in batch:
                             row["age"] = int(row["age"])
                             yield row
