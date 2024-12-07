@@ -1,6 +1,7 @@
 import sqlite3
 import functools
 import logging
+from datetime import datetime
 
 logging.basicConfig(level=logging.INFO, filename='0-log_queries.log', filemode='a',
     format='%(asctime)s - %(levelname)s - %(message)s')
@@ -10,7 +11,7 @@ logging.basicConfig(level=logging.INFO, filename='0-log_queries.log', filemode='
 def log_queries(func):
     @functools.wraps(func)
     def wrapper(*args, **kwargs):
-        print(f"Executing query: {kwargs.get('query')}")
+        print(f"{datetime.now()} - Executing query: {kwargs.get('query')}")
         logging.info(f"Executing query: {kwargs.get('query')}")
         return func(*args, **kwargs)
     return wrapper
