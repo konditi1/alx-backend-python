@@ -22,11 +22,14 @@ def connect_db(database=None):
         user = os.getenv("DB_USER")
         password = os.getenv("DB_PASSWORD")
 
+        
+
         connection = mysql.connector.connect(
             host=host,
             user=user,
-            password=password
-            )
+            password=password,
+            database=database
+        )
         
         if connection.is_connected():
             return connection

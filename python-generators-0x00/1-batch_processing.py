@@ -17,16 +17,11 @@ def stream_users_in_batches(batch_size):
         with connect_db(database="ALX_prodev") as connection:
             if connection and connection.is_connected():
                 with connection.cursor(dictionary=True, buffered=False) as cursor:
-                    cursor.execute("USE ALX_prodev;")
                     cursor.execute("SELECT user_id, name, email, age FROM user_data;")
                     while batch := cursor.fetchmany(batch_size):            
                         for row in batch:
-                            yield {
-                                "user_id" : row["user_id"],
-                                "name" : row["name"],
-                                "email" : row["email"],
-                                "age" : row["age"]
-                            }
+                            row["age"] = int(row["age"])
+                            yield row
             else:
                 raise ValueError("Failed to connect to ALX_prodev database.")
 

@@ -12,16 +12,10 @@ def stream_users():
         with seed.connect_to_prodev() as connection:
             if connection and connection.is_connected():
                 with connection.cursor(dictionary=True, buffered=True) as cursor:
-                        cursor.execute("USE ALX_prodev;")
                         cursor.execute("SELECT user_id, name, email, age FROM user_data;")
                         
                         for row in cursor:
-                            yield {
-                                "user_id" : row["user_id"],
-                                "name" : row["name"],
-                                "email" : row["email"],
-                                "age" : row["age"]
-                            }                   
+                            yield { f"user_id: {row['user_id']}, name: {row['name']}, email: {row['email']}, age: {row['age']}" }                   
                         
             else:
                 raise ValueError("Failed to connect to ALX_prodev database.")
