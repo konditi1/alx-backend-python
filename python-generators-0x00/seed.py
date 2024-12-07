@@ -79,7 +79,7 @@ def connect_to_prodev():
         connection = connect_db(database="ALX_prodev")
 
         if connection and connection.is_connected():
-            print("Connected to ALX_prodev database.")
+            # print("Connected to ALX_prodev database.")
             return connection
 
         else:
@@ -90,11 +90,11 @@ def connect_to_prodev():
         return None
     
 
-# if __name__ == "__main__":
-#     connection = connect_to_prodev()
-#     if connection:
-#         connection.close()
-#         print("Connection closed.")
+if __name__ == "__main__":
+    connection = connect_to_prodev()
+    if connection:
+        connection.close()
+        print("Connection closed.")
 
 
 def create_table(connection):
@@ -118,7 +118,8 @@ def create_table(connection):
                     age DECIMAL(3, 0) NOT NULL
                 )
             """)
-            connection.commit()       
+            connection.commit() 
+            print("Table user_data created successfully")      
 
     except Error as e:
         logging.error(f"Error creating table: {e}")
@@ -169,23 +170,20 @@ def insert_data(connection, data):
                 rows_to_insert = []
 
                 for row in reader:
-                    # Validate data types
                     name = row["name"].strip()
                     email = row["email"].strip()
                     try:
                         age = int(row["age"])
                     except ValueError:
                         logging.warning(f"Skipping row with invalid age: {row}")
-                        continue  # Skip invalid rows
+                        continue 
 
-                    # Add row to batch
                     rows_to_insert.append((name, email, age))
 
-                # Execute batch insertion
                 if rows_to_insert:
                     cursor.executemany(insert_query, rows_to_insert)
                     connection.commit()
-                    print(f"Inserted {cursor.rowcount} rows successfully.")
+                    # print(f"Inserted {cursor.rowcount} rows successfully.")
                 else:
                     print("No valid rows to insert.")
 
@@ -205,15 +203,11 @@ def insert_data(connection, data):
         print(f"An unexpected error occurred: {e}")
         logging.error(f"Unexpected error: {e}")
 
-    finally:
-        print("Data insertion task completed.")
-
-
-if __name__ == "__main__":
-    connection = connect_to_prodev()
-    if connection:
-        insert_data(connection, 'user_data.csv')
-        connection.close()
-        print("Data inserted.")
-        print("Data insertion task completed.")
+# if __name__ == "__main__":
+#     connection = connect_to_prodev()
+#     if connection:
+#         insert_data(connection, 'user_data.csv')
+#         connection.close()
+#         print("Data inserted.")
+#         print("Data insertion task completed.")
      
