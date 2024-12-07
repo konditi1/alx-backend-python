@@ -9,21 +9,20 @@ def stream_users():
     A generator function that yields user data from the user_data table in the ALX_prodev database.
     """ 
     try:
-        connection = seed.connect_to_prodev()
-
-        with connection.cursor(dictionary=True, buffered=True) as cursor:
+        with seed.connect_to_prodev() as connection:
             if connection and connection.is_connected():
-                cursor.execute("USE ALX_prodev;")
-                cursor.execute("SELECT user_id, name, email, age FROM user_data;")
-                
-                for row in cursor:
-                    yield {
-                        "user_id" : row["user_id"],
-                        "name" : row["name"],
-                        "email" : row["email"],
-                        "age" : row["age"]
-                    }                   
-                    
+                with connection.cursor(dictionary=True, buffered=True) as cursor:
+                        cursor.execute("USE ALX_prodev;")
+                        cursor.execute("SELECT user_id, name, email, age FROM user_data;")
+                        
+                        for row in cursor:
+                            yield {
+                                "user_id" : row["user_id"],
+                                "name" : row["name"],
+                                "email" : row["email"],
+                                "age" : row["age"]
+                            }                   
+                        
             else:
                 raise ValueError("Failed to connect to ALX_prodev database.")
     
