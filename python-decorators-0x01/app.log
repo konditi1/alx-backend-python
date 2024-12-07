@@ -1,0 +1,4 @@
+2024-12-08 00:53:24,626 - ERROR - Value error: Missing required fields in the CSV file
+2024-12-08 00:55:06,343 - ERROR - Unexpected error: ON CONFLICT clause does not match any PRIMARY KEY or UNIQUE constraint
+2024-12-08 00:56:16,300 - ERROR - Value error: Missing required fields in the CSV file
+2024-12-08 00:57:21,511 - ERROR - Unexpected error: ON CONFLICT clause does not match any PRIMARY KEY or UNIQUE constraint
