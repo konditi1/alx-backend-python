@@ -16,9 +16,11 @@ async def async_fetch_older_users():
 async def fetch_concurrently():
     users = async_fetch_users()
     older_users = async_fetch_older_users()
-    user, older_user = await asyncio.gather(users, older_users)
-    print(user)
-    print(older_user)
+    try:
+        older_user = await asyncio.gather(users, older_users)
+        print(older_user)
+    except Exception as e:
+        print(e)
 
 
 if __name__ == "__main__":
