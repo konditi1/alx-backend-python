@@ -7,3 +7,6 @@
 	0x02-python_async_comprehension/__pycache__/
 python-context-async-perations-0x02/users.db
 
+.idea/
+__pycache__/
+*.pyc
