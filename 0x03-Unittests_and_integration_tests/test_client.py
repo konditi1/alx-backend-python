@@ -62,10 +62,11 @@ class TestGithubOrgClient(unittest.TestCase):
             mock_public.assert_called_once()
             mock_json.assert_called_once()
 
+
 @parameterized.expand([
     # Test case for when the license key matches the expected license key
     ({"license": {"key": "my_license"}}, "my_license", True),
-    # Test case for when the license key does not match the expected license key
+    # Test case for when license key does not match expected license key
     ({"license": {"key": "other_license"}}, "my_license", False)
 ])
 def test_has_license(self, repo, license_key, expected):
@@ -107,6 +108,7 @@ class TestIntegrationGithubOrgClient(unittest.TestCase):
 
         cls.mock = cls.get_patcher.start()
 
+
 def test_public_repos(self):
     """Test for the public_repos method of GithubOrgClient."""
 
@@ -118,9 +120,10 @@ def test_public_repos(self):
     self.assertEqual(test_class.repos_payload, self.repos_payload)
     self.assertEqual(test_class.public_repos(), self.expected_repos)
     self.assertEqual(test_class.public_repos("XLICENSE"), [])
-    
+
     # Teardown
     self.mock.assert_called()
+
 
 def test_public_repos_with_license(self):
     """Test for retrieving public repositories with a specified license."""
@@ -133,11 +136,12 @@ def test_public_repos_with_license(self):
     # Assert that calling public_repos("XLICENSE") returns an empty list
     self.assertEqual(test_class.public_repos("XLICENSE"), [])
 
-    # Assert that calling public_repos("apache-2.0") returns the apache2_repos list
+    # Assert that calling public_repos("apache-2.0") returns apache2_repos list
     self.assertEqual(test_class.public_repos("apache-2.0"), self.apache2_repos)
 
     # Ensure that the mock object's assert_called method was called
     self.mock.assert_called()
+
 
 @classmethod
 def tearDownClass(cls):
