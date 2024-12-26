@@ -10,3 +10,17 @@ python-context-async-perations-0x02/users.db
 .idea/
 __pycache__/
 *.pyc
+
+# Default ignored files
+/shelf/
+/workspace.xml
+
+# Virtual Environment
+message_env/
+.env
+# Database
+*.sqlite3
+
+# IDE
+.vscode/
+.idea/
