@@ -16,7 +16,7 @@ class UserSerializer(TimeStampedModelSerializer):
     # using write-only field for password_hash to avoid sending password_hash in response
     password_hash = serializers.CharField(write_only=True)
 
-    full_name = serializers.CharField(read_only=True)
+    full_name = serializers.SerializerMethodField(read_only=True)
 
     class Meta:
         model = User
