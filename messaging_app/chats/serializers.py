@@ -1,6 +1,5 @@
 from rest_framework import serializers
-# from django.contrib.auth.models import BaseUserManager
-from .models import User
+from .models import User, Message, Conversation
 
 
 class TimeStampedModelSerializer(serializers.ModelSerializer):
@@ -40,3 +39,23 @@ class UserSerializer(TimeStampedModelSerializer):
         print(user.password)
         user.save()
         return user
+    
+    
+class MessageSerializer(serializers.ModelSerializer):
+    sender =  UserSerializer(read_only=True)
+    recipient = UserSerializer(read_only=True)
+    class Meta:
+        model = Message
+        fields = ["message_id", "conversation", "sender", "recipient", "message_body", "sent_at", "read_at", "deleted_at"]
+        read_only_fields = ["sent_at", "read_at", "deleted_at"]
+
+
+
+class ConversationSerializer(serializers.ModelSerializer):
+    participants = UserSerializer(many=True, read_only=True)
+    message = MessageSerializer(many=True, read_only=True)
+
+    class Meta:
+        model = Conversation
+        fields = ["conversation_id", "participants", "message", "created_at"]
+        read_only_fields = ["created_at"]
