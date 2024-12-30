@@ -1,0 +1,26 @@
+[tool.black]
+line-length = 200
+target-version = ['py38']
+include = '\.pyi?$'
+exclude = '''
+  /(
+      \.eggs
+    | \.git
+    | \.hg
+    | \.mypy_cache
+    | \.tox
+    | \.venv
+    | _build
+    | buck-out
+    | build
+    | dist
+    | migrations
+     # Add your specific files here, separated by pipes (|)
+    | messaging_app/apps\.py
+    | messaging_app/asgi\.py
+    | messaging_app/manage\.py
+    | messaging_app/wsgi\.py
+    | messaging_app/urls\.py
+    | messaging_app/settings\.py
+  )/
+'''
