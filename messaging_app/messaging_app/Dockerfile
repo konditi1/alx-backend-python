@@ -14,7 +14,7 @@ ENV PYTHONUNBUFFERED 1
 
 
 # Set work directory
-WORKDIR /messaging_app
+WORKDIR /app
 
 # Install system dependencies for mysqlclient and pip
 RUN apt-get update && apt-get install -y \
@@ -33,7 +33,8 @@ RUN pip install --no-cache-dir -r Requirements.txt
 COPY . .
 
 # Expose the port your Django app runs on
-EXPOSE -p 8000
+EXPOSE 8000
 
 # Run the Django application
+
 CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
