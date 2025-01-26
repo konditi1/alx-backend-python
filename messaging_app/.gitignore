@@ -1,0 +1,10 @@
+# Virtual Environment
+message_env/
+venv
+.env
+# Database
+*.sqlite3
+
+# IDE
+.vscode/
+.idea/
