@@ -1,0 +1,59 @@
+pipeline {
+    agent any
+
+    environment {
+        GIT_CREDENTIALS = 'your-github-credentials-id'  // Replace with your GitHub credentials ID
+        DOCKERHUB_USERNAME = 'your-dockerhub-username'  // Replace with your Docker Hub username
+        DOCKERHUB_PASSWORD = 'your-dockerhub-password'  // Replace with your Docker Hub password
+        IMAGE_NAME = 'your-dockerhub-username/messaging-app'  // Replace with your desired Docker image name
+    }
+
+    stages {
+        stage('Checkout Code') {
+            steps {
+                git branch: 'main', credentialsId: "${GIT_CREDENTIALS}", url: 'https://github.com/yourusername/messaging-app.git'  // Replace with your repository details
+            }
+        }
+
+        stage('Install Dependencies') {
+            steps {
+                sh 'pip3 install -r messaging_app/requirements.txt'
+            }
+        }
+
+        stage('Run Tests') {
+            steps {
+                sh 'pytest --maxfail=1 --disable-warnings -q'
+            }
+        }
+
+        stage('Build Docker Image') {
+            steps {
+                script {
+                    sh '''
+                    docker build -t ${IMAGE_NAME}:latest .
+                    '''
+                }
+            }
+        }
+
+        stage('Push Docker Image') {
+            steps {
+                script {
+                    withCredentials([usernamePassword(credentialsId: 'dockerhub-credentials-id', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
+                        sh '''
+                        echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin
+                        docker push ${IMAGE_NAME}:latest
+                        '''
+                    }
+                }
+            }
+        }
+    }
+
+    post {
+        always {
+            cleanWs()
+        }
+    }
+}
