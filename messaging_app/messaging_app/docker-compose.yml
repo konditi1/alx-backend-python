@@ -8,11 +8,11 @@ services:
     volumes:
       - .:/messaging_app
     environment:
-      - DB_HOST=db
+      - MYSQL_DB=db
       - DB_PORT=3306
       - DB_NAME=alx_travel_app_0x00
-      - DB_USER=alx_travel_app
-      - DB_PASSWORD=2222
+      - MYSQL_USER=alx_travel_app
+      - MYSQL_PASSWORD=2222
     depends_on:
       - db
   
