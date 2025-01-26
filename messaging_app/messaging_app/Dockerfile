@@ -33,7 +33,7 @@ RUN pip install --no-cache-dir -r Requirements.txt
 COPY . .
 
 # Expose the port your Django app runs on
-EXPOSE 8000
+EXPOSE -p 8000
 
 # Run the Django application
 
